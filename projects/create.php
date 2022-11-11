@@ -14,12 +14,6 @@ if (!$auth->isLoggedIn()) {
     exit;
 }
 
-// get project id from url 
-// if id is not set redirect to projects.php 
-if (!isset($_GET['id'])) {
-    header('Location: /projects.php');
-    exit;
-}
 
 
 // check if user is owner of project 
