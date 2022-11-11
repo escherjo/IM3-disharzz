@@ -49,24 +49,20 @@ class Projects
         return $project;
     }
 
-    public function getProjects($userId)
-    {
-        $sql = "SELECT * FROM ". $this -> db_table ." WHERE user_id = :user_id";
-        $stmt = $this -> connection -> prepare($sql);
-        $stmt -> bindParam(':user_id', $userId);
-        $stmt -> execute();
-        $projects = $stmt -> fetchAll();
-        return $projects;
-    }
-
     public function createProject($title, $description, $userId)
     {
-        $sql = "INSERT INTO " . $this -> db_table . " (title, description, user_id) VALUES (:title, :description, :user_id)";
-        $stmt = $this -> connection -> prepare($sql);
-        $stmt -> bindParam(':title', $title);
-        $stmt -> bindParam(':description', $description);
-        $stmt -> bindParam(':user_id', $userId);
-        $stmt -> execute();
+        try {
+            $sql = "INSERT INTO " . $this -> db_table . " (user_id, title, description ) VALUES (:user_id, :title, :description)";
+            $stmt = $this -> connection -> prepare($sql);
+            $stmt -> bindParam(':title', $title);
+            $stmt -> bindParam(':description', $description);
+            $stmt -> bindParam(':user_id', $userId);
+            $stmt -> execute();
+            echo 'project created';
+            return true;
+        } catch (PDOException $e) {
+            return $e -> getMessage();
+        }
     }
 
     public function deleteProject($project_id)
@@ -100,6 +96,17 @@ class Projects
     public function getLastID()
     {
         return $this -> connection -> lastInsertId();
+    }
+
+
+    public function getUserProjects($userId)
+    {
+        $sql = "SELECT * FROM ". $this -> db_table ." WHERE user_id = :user_id";
+        $stmt = $this -> connection -> prepare($sql);
+        $stmt -> bindParam(':user_id', $userId);
+        $stmt -> execute();
+        $projects = $stmt -> fetchAll();
+        return $projects;
     }
 
     public function getAllProjects()

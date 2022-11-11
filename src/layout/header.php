@@ -9,7 +9,7 @@ echo $_SESSION['username'];
 
 <header>
   <div>
-    <h1>Disharezz</h1>
+    <h1>Disharzz</h1>
     <nav>
       <ul>
         <li><a href="/">Home</a></li>
