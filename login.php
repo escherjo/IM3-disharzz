@@ -9,10 +9,9 @@ if ($auth -> isLoggedIn()) {
     exit();
 }
 ?>
-<div><?php echo $error ?></div>
+<div><?php echo $_SESSION['error']?></div>
 <form action="/auth/login.php" method="post">
   <input type="text" name="username" placeholder="Username" required>
   <input type="password" name="password" placeholder="Password" required>
-    <input type="submit" name="login" value="Login">
-
+  <input type="submit" name="login" value="Login">
 </form> 

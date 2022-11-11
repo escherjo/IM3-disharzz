@@ -1,9 +1,15 @@
 <?php
 
-echo $_SESSION['user_id'];
 echo $_SESSION['message'];
-echo $_SESSION['success'];
 echo $_SESSION['username'];
+
+// if successful message show message and reset session
+if (isset($_SESSION['success'])) {
+    echo $_SESSION['success'];
+}
+
+// show $_SESSION['success'] if set for 5 seconds
+
 
 ?>
 

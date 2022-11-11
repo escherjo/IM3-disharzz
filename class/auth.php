@@ -88,26 +88,27 @@ class Auth
         // check if the username exists
         if (!$this -> isUsernameExists($username)) {
             return false;
-        } else {
-            // if the username exists, check if the password is correct
-            $query = "SELECT * FROM " . $this -> db_table . " WHERE username = :username";
-            $stmt = $this -> connection -> prepare($query);
-            $stmt -> bindParam(":username", $username);
-            $stmt -> execute();
-            if ($stmt -> rowCount() == 1) {
-                $row = $stmt->fetch();
-                if (password_verify($password, $row['password'])) {
-                    // if the password is correct, set the session
-                    $_SESSION['user_id'] = $row['id'];
-                    $_SESSION['username'] = $row['username'];
-                    $_SESSION['message'] = "You are now logged in";
-                    return true;
-                }
-                $_SESSION['message'] = "You have entered wrong password, try again!";
-            } else {
-                return false;
-            }
         }
+        // if the username exists, check if the password is correct
+        $query = "SELECT * FROM " . $this -> db_table . " WHERE username = :username";
+        $stmt = $this -> connection -> prepare($query);
+        $stmt -> bindParam(":username", $username);
+        $stmt -> execute();
+        if ($stmt -> rowCount() == 1) {
+            $row = $stmt->fetch();
+            if (password_verify($password, $row['password'])) {
+                // if the password is correct, set the session
+                $_SESSION['user_id'] = $row['id'];
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['success'] = "You are now logged in";
+                $_SESSION['error'] = "";
+                return true;
+            }
+            $_SESSION['error'] = "You have entered wrong password, try again!";
+            return false;
+        } 
+        $_SESSION['error'] = "Oops! Something went wrong. Please try again later.";
+        return false;
     }
 
     // create function for user logout

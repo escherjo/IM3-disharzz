@@ -23,8 +23,7 @@ if (isset($_POST['login'])) {
         // If the login is successful, redirect the user to the members page
         header('Location: /');
         exit();
-    } else {
-        // If the login is unsuccessful, display an error message
-        $error = 'Incorrect username, email or password';
-    }
+    } 
+    // redirect to login page
+    header('Location: /login.php');
 }
