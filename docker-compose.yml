@@ -1,0 +1,24 @@
+
+services:
+  web:
+    image: webdevops/php-nginx:8.0-alpine 
+    working_dir: /app
+    ports:
+      - 80:80
+    volumes:
+      - ./:/app
+
+  mariadb:
+    image: mariadb:10.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: notSecureChangeMeOrNot
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mariadb
