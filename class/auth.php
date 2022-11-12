@@ -38,6 +38,16 @@ class Auth
     {
         // check if the user is logged in
         if (isset($_SESSION['user_id'])) {
+            // check if time stamp is older than 30 minutes
+           if ($_SESSION['timestamp'] + 1800 < time()) {
+                // destroy the session
+                session_destroy();
+                // redirect to login page
+                header('Location: /');
+                exit();
+            } 
+            // update the time stamp
+            $_SESSION['timestamp'] = time();
             return true;
         }
         return false;
@@ -102,6 +112,8 @@ class Auth
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['success'] = "You are now logged in";
                 $_SESSION['error'] = "";
+                // create session time stamp 
+                $_SESSION['timestamp'] = time();
                 return true;
             }
             $_SESSION['error'] = "You have entered wrong password, try again!";
