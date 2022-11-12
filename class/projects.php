@@ -115,6 +115,7 @@ class Projects
         $stmt = $this -> connection -> prepare($sql);
         $stmt -> execute();
         $projects = $stmt -> fetchAll();
-        return $projects;
+        $json = json_encode($projects);
+        return $json;
     }
 }
