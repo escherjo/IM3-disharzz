@@ -14,7 +14,6 @@ $projects = new Projects();
         <?php include('src/layout/header.php'); // File containing header code?>
         <h1>Test</h1>
         <p>Test</p>
-
         <!-- Include Footer -->
         <?php include('src/layout/footer.php'); // File containing footer code?>
     </body>

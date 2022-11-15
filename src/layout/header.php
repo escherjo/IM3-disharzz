@@ -22,20 +22,20 @@ if (isset($_SESSION['success'])) {
         <li><a href="/projects.php">Projekte</a></li>
       </ul>
       <ul>
-<?php
-if ($auth->isLoggedIn()) {
-    ?>
-  <li>Hallo <?php echo $_SESSION['username'] ?></li>
-  <li><a href="/profile.php">Profile</a></li>
-  <li><a href="/auth/logout.php">Logout</a></li>
+      <?php
+      if ($auth->isLoggedIn()) {
+        ?>
+        <li>Hallo <?php echo $_SESSION['username'] ?></li>
+        <li><a href="/profile.php">Profile</a></li>
+        <li><a href="/auth/logout.php">Logout</a></li>
         <?php
-} else {
-    ?> 
-    <li><a href="/login.php">Login</a></li>
-    <li><a href="/register.php">Register</a></li>
-  <?php
-}
-?>
+        } else {
+        ?> 
+        <li><a href="/login.php">Login</a></li>
+        <li><a href="/register.php">Register</a></li>
+        <?php
+      }
+      ?>
       </ul>
     </nav>
   </div>

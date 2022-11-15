@@ -20,18 +20,18 @@ if (!$auth -> isLoggedIn()) {
         <?php include('src/layout/header.php'); // File containing header code?>
         <h1>Profile</h1>
         <?php
-          switch ($_GET['page']) {
-              case 'createProject':
-                  include('src/profile/createProject.php');
-                  break;
-              case 'showProjects':
-                  include('src/profile/showProjects.php');
-                  break;
-              default:
-                  include('src/profile/overview.php');
-                  break;
-          }
-?>
+        switch ($_GET['page']) {
+            case 'createProject':
+                include('src/profile/createProject.php');
+                break;
+            case 'showProjects':
+                include('src/profile/showProjects.php');
+                break;
+            default:
+                include('src/profile/overview.php');
+                break;
+        }
+        ?>
         <!-- Include Footer -->
         <?php include('src/layout/footer.php'); // File containing footer code?>
     </body>
