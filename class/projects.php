@@ -26,7 +26,7 @@ class Projects
         //close pdo connection
         $this -> connection = null;
     }
-    public function isOwner($project_id, $user_id)
+    public function isOwner($project_id, $user_id):bool
     {
         $sql = "SELECT * FROM " . $this -> db_table . " WHERE id = :project_id AND user_id = :user_id";
         $stmt = $this -> connection -> prepare($sql);
@@ -41,7 +41,7 @@ class Projects
         }
     }
 
-    public function getProject($project_id)
+    public function getProject($project_id):array
     {
         $sql = "SELECT * FROM " . $this -> db_table . " WHERE id = :project_id";
         $stmt = $this -> connection -> prepare($sql);
@@ -51,7 +51,7 @@ class Projects
         return $project;
     }
 
-    public function createProject($title, $description, $userId, $tags)
+    public function createProject($title, $description, $userId, $tags):bool | string
     {
         try {
             $sql = "INSERT INTO " . $this -> db_table . " (user_id, title, description, tags ) VALUES (:user_id, :title, :description, :tags)";
@@ -61,15 +61,13 @@ class Projects
             $stmt -> bindParam(':user_id', $userId);
             $stmt -> bindParam(':tags', $tags);
             $stmt -> execute();
-
-            echo 'project created';
             return true;
         } catch (PDOException $e) {
             return $e -> getMessage();
         }
     }
 
-    public function deleteProject($project_id)
+    public function deleteProject($project_id) : bool | string
     {
         try {
             $sql = "DELETE FROM " . $this -> db_table . " WHERE id = :project_id";
@@ -84,7 +82,7 @@ class Projects
         }
     }
 
-    public function updateProject($project_id, $title, $description, $tags)
+    public function updateProject($project_id, $title, $description, $tags): bool | string
     {
       try {
         $sql = "UPDATE " . $this -> db_table . " SET title = :title, description = :description, tags = :tags WHERE id = :project_id";
@@ -100,13 +98,13 @@ class Projects
       }
     }
 
-    public function getLastID()
+    public function getLastID():int
     {
         return $this -> connection -> lastInsertId();
     }
 
 
-    public function getUserProjects($userId)
+    public function getUserProjects($userId):string
     {
         $sql = "SELECT * FROM ". $this -> db_table ." WHERE user_id = :user_id";
         $stmt = $this -> connection -> prepare($sql);
@@ -116,7 +114,7 @@ class Projects
         return $projects;
     }
 
-    public function getAllProjects()
+    public function getAllProjects():string
     {
         $sql = "SELECT * FROM ". $this -> db_table;
         $stmt = $this -> connection -> prepare($sql);
@@ -127,7 +125,7 @@ class Projects
     }
 
 
-    public function getAllTags()
+    public function getAllTags():string
     {
       // selet tags from projects table 
       $sql = "SELECT tags FROM ". $this -> db_table;
