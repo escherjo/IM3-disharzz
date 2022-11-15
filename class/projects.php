@@ -51,7 +51,7 @@ class Projects
         return $project;
     }
 
-    public function createProject($title, $description, $userId, $tags):bool | string
+    public function createProject($userId, $title, $description, $tags):bool | string
     {
         try {
             $sql = "INSERT INTO " . $this -> db_table . " (user_id, title, description, tags ) VALUES (:user_id, :title, :description, :tags)";
@@ -74,8 +74,6 @@ class Projects
             $stmt = $this -> connection -> prepare($sql);
             $stmt -> bindParam(':project_id', $project_id);
             $stmt -> execute();
-            // delete tags 
-            $this -> tags -> deleteAllTagsForProject($project_id);
             return true;
         } catch (PDOException $e) {
             return $e -> getMessage();
@@ -104,7 +102,7 @@ class Projects
     }
 
 
-    public function getUserProjects($userId):string
+    public function getUserProjects($userId):array
     {
         $sql = "SELECT * FROM ". $this -> db_table ." WHERE user_id = :user_id";
         $stmt = $this -> connection -> prepare($sql);

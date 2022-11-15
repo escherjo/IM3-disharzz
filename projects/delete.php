@@ -2,8 +2,6 @@
 // load auth and project Class
 require_once '../class/auth.php';
 require_once '../class/projects.php';
-$auth = new Auth();
-$projects = new Projects();
 
 $auth = new Auth();
 $projects = new Projects();

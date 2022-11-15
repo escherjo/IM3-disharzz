@@ -10,6 +10,27 @@ if (!$auth -> isLoggedIn()) {
     header('Location: /');
     exit();
 }
+//
+// check if form was submitted 
+// if yes update project 
+// if no show form 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (isset($_POST['update'])) {
+    if($projects->updateProject($_GET['id'], $_POST['title'], $_POST['description'], $_POST['tags'])) {
+      $_SESSION['success'] = 'Project updated successfully';
+      header('Location: /projects/show.php?id=' . $_GET['id']);
+      //header('Location: /projects.php');
+    }
+  }
+
+  if(isset($_POST['createProject'])) {
+    if ($projects -> createProject($auth -> getUserID(), $_POST['title'], $_POST['description'], $_POST['tags'] )) {
+      header('Location: /profile.php');
+    } else {
+      $_SESSION['error'] = 'Project creation failed';
+    }
+  }
+}
 ?>
 <html>
     <head>
@@ -23,6 +44,9 @@ if (!$auth -> isLoggedIn()) {
         switch ($_GET['page']) {
             case 'createProject':
                 include('src/profile/createProject.php');
+                break;
+            case 'editProject':
+                include('src/profile/editProject.php');
                 break;
             case 'showProjects':
                 include('src/profile/showProjects.php');
