@@ -9,7 +9,7 @@ class DBConnection
     private $db_name = 'database';
     private $db_port = '3306';
 
-    public function connect()
+    public function connect():PDO
     {
         $con = new PDO("mysql:host=$this->db;dbname=$this->db_name;port=$this->db_port", $this->db_username, $this->db_password);
         $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

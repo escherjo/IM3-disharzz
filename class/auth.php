@@ -28,13 +28,13 @@ class Auth
 
     public function __destruct()
     {
-        //close pdo connection
         $this -> connection = null;
+        
     }
 
 
     // Function to check if the user is logged in
-    public function isLoggedIn()
+    public function isLoggedIn():bool
     {
         // check if the user is logged in
         if (isset($_SESSION['user_id'])) {
@@ -53,16 +53,16 @@ class Auth
         return false;
     }
 
-    public function getUserID()
+    public function getUserID():int
     {
         if ($this->isLoggedIn()) {
             return $_SESSION['user_id'];
         }
-        return false;
+        return 0;
     }
 
     // create function isUsernameExists
-    public function isUsernameExists($username)
+    public function isUsernameExists($username):bool
     {
         $query = "SELECT * FROM " . $this -> db_table . " WHERE username = ?";
         $stmt = $this -> connection -> prepare($query);
@@ -74,7 +74,7 @@ class Auth
     }
 
     // create function for user registration
-    public function register($username, $email, $password)
+    public function register($username, $email, $password):bool
     {
         // check if the username already exists
         if ($this -> isUsernameExists($username)) {
@@ -93,7 +93,7 @@ class Auth
     }
 
     // create functin for user login
-    public function login($username, $password)
+    public function login($username, $password):bool
     {
         // check if the username exists
         if (!$this -> isUsernameExists($username)) {
@@ -124,7 +124,7 @@ class Auth
     }
 
     // create function for user logout
-    public function logout()
+    public function logout():void
     {
         // remove all session variables
         session_unset();

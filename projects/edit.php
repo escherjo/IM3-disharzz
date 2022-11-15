@@ -41,7 +41,7 @@ if (!$project) {
 // if yes update project 
 // if no show form 
 if (isset($_POST['submit'])) {
-  if($projects->updateProject($_GET['id'], $_POST['title'], $_POST['description'])) {
+  if($projects->updateProject($_GET['id'], $_POST['title'], $_POST['description'], $_POST['tags'])) {
     $_SESSION['success'] = 'Project updated successfully';
     header('Location: /projects/show.php?id=' . $_GET['id']);
   }
@@ -62,6 +62,8 @@ if (isset($_POST['submit'])) {
           <input type="text" name="title" id="title" value="<?php echo $project['title'] ?>">
           <label for="description">Description</label>
           <textarea name="description" id="description" cols="30" rows="10"><?php echo $project['description'] ?></textarea>
+          <label for="tags">Tags</label>
+          <input type="text" name="tags" id="tags" value="<?php echo $project['tags'] ?>">
           <input type="submit" name="submit" value="Update">
         </form>
 

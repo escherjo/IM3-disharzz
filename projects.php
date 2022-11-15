@@ -15,8 +15,13 @@ $projects = new Projects();
         <h1>Test</h1>
         <p>Test</p>
 
-        <input type="text" id="searchInput" placeholder="Search....">
-        <button id="searchButton">Search</button>
+        <div id='searchSection'>
+          <input type="text" id="searchInput" placeholder="Search....">
+          <button id="searchButton">Search</button>
+          <div id='tags'>
+          </div>
+            <button id='reset'>Reset</button>
+        </div>
         <!-- Projects placeholder -->
         <div id='projects'></div>
 
@@ -52,17 +57,58 @@ $projects = new Projects();
         showProjects(searchInput);
     })
 
-    // create function to display projects 
-    // on the page 
-    // and pass in the projects 
-    // as an argument 
-    // so we can display them 
-    // on the page 
-
-    // create async function to display the projects and filter them 
-    // by search input 
-
     let searchInput = '';
+    let filterTags = [];
+
+    // eventlistener on the reset button 
+    // to reset the search input and the filter tags 
+    // and show all projects 
+    // when the reset button is clicked 
+    // and call the showProjects function 
+    // to show all projects 
+    document.getElementById('reset').addEventListener('click', function () {
+        searchInput = '';
+        filterTags = [];
+        showProjects();
+    })
+    
+    async function showTags() {
+        // get all tags from api 
+        const response = await fetch('http://localhost/api/tags.php', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Credentials': 'include'
+            }
+        })
+        const data = await response.json();
+
+        // loop through all tags 
+        data.forEach(tag => {
+            // create tag element 
+            let tagElement = document.createElement('div');
+            tagElement.classList.add('tag');
+            tagElement.innerText = tag;
+
+            // add event listener to tag 
+            tagElement.addEventListener('click', function () {
+                // check if tag is already in filterTags 
+              // if yes remove it 
+              // if no add it 
+              if (filterTags.includes(tag)) {
+                filterTags = filterTags.filter(t => t !== tag);
+              } else {
+                filterTags.push(tag);
+              }
+              showProjects(searchInput, filterTags);
+            })
+
+            // append tag to tags div 
+            document.getElementById('tags').appendChild(tagElement);
+        })
+    }
+
 
 
     async function filterProjects(searchInput) {
@@ -78,13 +124,44 @@ $projects = new Projects();
                 filteredProjects.push(project);
             }
         });
-        // return the filtered projects 
-        return filteredProjects;
+
+        if (filterTags.length > 0) {
+          const filteredProjectsByTags = [];
+          filteredProjects.forEach(project => {
+            filterTags.forEach(tag => {
+              if (project.tags.includes(tag)) {
+                // check if project is already in filteredProjectsByTags 
+              // if yes do nothing 
+              // if no push it to the array 
+              // so we dont get duplicates 
+              if (!filteredProjectsByTags.includes(project)) {
+
+                filteredProjectsByTags.push(project);
+              }
+              }
+            })
+          });
+          return filteredProjectsByTags;
+        } else {
+          return filteredProjects;
+        }
+    }
+
+    // function to reset filter tags 
+    function resetFilterTags() {
+      filterTags = [];
+      showProjects(searchInput, filterTags);
     }
 
     // call the function and get the data 
     // and then create the cards 
     function showProjects(searchInput) {
+      // check if searchInput is empty 
+      // if yes set it to an empty string 
+      // so we can use it in the filterProjects function 
+      if (searchInput === undefined) {
+        searchInput = '';
+      }
 
 
       // get projects container and clear it
@@ -121,6 +198,19 @@ $projects = new Projects();
               const projectFooterLink = document.createElement('a'); 
               projectFooterLink.href = '/projects/show.php?id=' + project.id; 
               projectFooterLink.innerText = 'View Project'; 
+              const projectFooterTags = document.createElement('div');
+              projectFooterTags.classList.add('project-card__tags');
+              // create array of tags 
+              const tags = project.tags.split(',');
+              // loop through the tags 
+              tags.forEach(tag => {
+                // create the tag in a <span></span>
+                // and append it to the tags <div></div>
+                const tagSpan = document.createElement('span');
+                tagSpan.innerText = tag;
+                projectFooterTags.appendChild(tagSpan);
+              });
+              projectCardFooter.appendChild(projectFooterTags);
               projectCardFooter.appendChild(projectFooterLink);
               projectCard.appendChild(projectCardFooter); 
               
@@ -131,6 +221,10 @@ $projects = new Projects();
     })
     }
 
+    //call the function to display the tags 
+    showTags();
+
+    // call the function to display the projects
     showProjects('')
 
   </script>

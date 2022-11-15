@@ -4,6 +4,9 @@
   </h4>
   <p><?php echo $project['description'] ?></p>
   <?php 
+  foreach ($project['tags'] as $tag) {
+    echo '<span class="badge badge-primary">' . $tag['name'] . '</span>';
+  }
   if ($project['user_id'] == $_SESSION['user_id']) {
       ?>
       <a href="/projects/edit.php?id=<?php echo $project['id'] ?>">Edit</a>
