@@ -5,9 +5,6 @@ require_once '../class/projects.php';
 $auth = new Auth();
 $projects = new Projects();
 
-$auth = new Auth();
-$projects = new Projects();
-
 // check if user is logged in 
 if (!$auth->isLoggedIn()) {
     header('Location: /');
