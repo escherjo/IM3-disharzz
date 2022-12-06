@@ -5,9 +5,6 @@ require_once '../class/projects.php';
 $auth = new Auth();
 $projects = new Projects();
 
-$auth = new Auth();
-$projects = new Projects();
-
 // check if id is set 
 // if not redirect to projects.php 
 if (!isset($_GET['id'])) {
