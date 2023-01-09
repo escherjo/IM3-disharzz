@@ -43,7 +43,9 @@ class Projects
 
     public function getProject($project_id):array
     {
-        $sql = "SELECT * FROM " . $this -> db_table . " WHERE id = :project_id";
+    // get project from database and user data from users table 
+        
+        $sql = "SELECT ". $this -> db_table . ".*, users.email, users.username FROM ". $this -> db_table ." INNER JOIN users ON projects.user_id = users.id WHERE projects.id = :project_id";
         $stmt = $this -> connection -> prepare($sql);
         $stmt -> bindParam(':project_id', $project_id);
         $stmt -> execute();

@@ -1,8 +1,9 @@
-<header>
+<header >
 
   <?php
 
   // if successful message show message and reset session
+
   if (isset($_SESSION['message'])) {
       echo '<div class="header__message" id="message">' . $_SESSION['message'] . '</div>';
       unset($_SESSION['message']);
@@ -17,7 +18,9 @@
 
   <div class="header__container">
     <div class="header__logo">
-      <h1>Disharzz</h1>
+    <a href="/">
+      <p>Disharzz</p>
+    </a>
     </div>
   <div class="header__burger" style='z-index: 100;'>
     <div class="burger" id="burger">
@@ -28,7 +31,6 @@
   </div>
     <nav class="header__nav" id='nav'>
       <ul class="header__menu">
-        <li><a href="/">Home</a></li>
         <li><a href="/projects.php">Projekte</a></li>
       <?php
       if ($auth->isLoggedIn()) {

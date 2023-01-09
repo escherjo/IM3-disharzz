@@ -11,18 +11,21 @@ $projects = new Projects();
         <!-- Include Header-->
         <?php include('src/layout/header.php'); // File containing header code?>
       <main class="container">
-        <h1>Test</h1>
-        <p>Test</p>
-
-        <div id='searchSection'>
-          <input type="text" id="searchInput" placeholder="Search....">
-          <button id="searchButton">Search</button>
-          <div id='tags'>
+        <div class='search' id='searchSection'>
+          <label for="search">Search</label>
+          <div class="input__container">
+            <input type="text" id="searchInput" placeholder="Search....">
           </div>
-            <button id='reset'>Reset</button>
-        </div>
+          <button id="searchButton" class="brutal-btn">Search</button>
+          <div class="tags__container">
+            <p>Tags</p>
+            <div class="tags" id='tags'>
+            </div>
+             <button id='reset' class='brutal-btn'>Reset</button>
+            </div>
+          </div>
         <!-- Projects placeholder -->
-        <div id='projects'></div>
+        <div class="projects" id='projects'></div>
       </main>
 
         <!-- Include Footer -->
@@ -69,6 +72,10 @@ $projects = new Projects();
     document.getElementById('reset').addEventListener('click', function () {
         searchInput = '';
         filterTags = [];
+        document.querySelectorAll('.tag').forEach(tag => {
+          tag.classList.remove('active');
+        })
+
         showProjects();
     })
     
@@ -86,9 +93,12 @@ $projects = new Projects();
 
         // loop through all tags 
         data.forEach(tag => {
+            // return if tag is '' 
+            if(tag === '') return;
             // create tag element 
             let tagElement = document.createElement('div');
             tagElement.classList.add('tag');
+            tagElement.classList.add('brutal-btn');
             tagElement.innerText = tag;
 
             // add event listener to tag 
@@ -98,8 +108,12 @@ $projects = new Projects();
               // if no add it 
               if (filterTags.includes(tag)) {
                 filterTags = filterTags.filter(t => t !== tag);
+                // remove active class from tag 
+               tagElement.classList.remove('active');
               } else {
                 filterTags.push(tag);
+                // add active class to tag
+                tagElement.classList.add('active');
               }
               showProjects(searchInput, filterTags);
             })
@@ -150,6 +164,7 @@ $projects = new Projects();
     // function to reset filter tags 
     function resetFilterTags() {
       filterTags = [];
+      // remove active class from all tags 
       showProjects(searchInput, filterTags);
     }
 
@@ -171,6 +186,9 @@ $projects = new Projects();
       projectsContainer.innerHTML = '';
 
       filterProjects(searchInput).then(data => {
+    if (data.length === 0) {
+      projectsContainer.innerHTML = '<p>No projects found</p>';
+    } else {
           data.forEach(project => {
               const projectCard = document.createElement('div');
               projectCard.classList.add('project-card');
@@ -178,7 +196,8 @@ $projects = new Projects();
               // create the title
               const projectCardHeader = document.createElement('div'); 
               projectCardHeader.classList.add('project-card__header'); 
-              const projectTitle = document.createElement('h2'); 
+              projectCardHeader.classList.add('gradient'); 
+              const projectTitle = document.createElement('p'); 
               projectTitle.classList.add('project-card__title'); 
               projectTitle.innerText = project.title; 
               projectCardHeader.appendChild(projectTitle); 
@@ -186,31 +205,39 @@ $projects = new Projects();
 
               // create the description
               const projectCardBody = document.createElement('div'); 
-              projectCardHeader.classList.add('project-card__body'); 
+              projectCardBody.classList.add('project-card__body'); 
               const projectBody = document.createElement('p'); 
               projectBody.innerText = project.description; 
               projectCardBody.appendChild(projectBody);
               projectCard.appendChild(projectCardBody);
+              const projectTags = document.createElement('div');
+              projectTags.classList.add('project-card__tags');
+              // create array of tags delemited by comma
+              const tags = project.tags.split(',');
+              // loop through the tags 
+              tags.forEach(tag => {
+                // create the tag in a <span></span>
+                // and append it to the tags <div></div>
+                if (tag !== '') {
+                  //trim whitespace
+                  const tagElement = document.createElement('span');
+                  tagElement.classList.add('tag');
+                  tagElement.innerText = '#' + tag.trim();
+                  projectTags.appendChild(tagElement);
+                }
+              });
+              projectCardBody.appendChild(projectTags);
 
               // create the footer 
               const projectCardFooter = document.createElement('div');
               projectCardFooter.classList.add('project-card__footer');
               const projectFooterLink = document.createElement('a'); 
               projectFooterLink.href = '/projects/show.php?id=' + project.id; 
-              projectFooterLink.innerText = 'View Project'; 
-              const projectFooterTags = document.createElement('div');
-              projectFooterTags.classList.add('project-card__tags');
-              // create array of tags 
-              const tags = project.tags.split(',');
-              // loop through the tags 
-              tags.forEach(tag => {
-                // create the tag in a <span></span>
-                // and append it to the tags <div></div>
-                const tagSpan = document.createElement('span');
-                tagSpan.innerText = tag;
-                projectFooterTags.appendChild(tagSpan);
-              });
-              projectCardFooter.appendChild(projectFooterTags);
+              const projectFooterLinkButton = document.createElement('button');
+              projectFooterLinkButton.classList.add('brutal-btn');
+              
+              projectFooterLink.appendChild(projectFooterLinkButton);
+              projectFooterLinkButton.innerText = 'View Project';
               projectCardFooter.appendChild(projectFooterLink);
               projectCard.appendChild(projectCardFooter); 
               
@@ -218,6 +245,8 @@ $projects = new Projects();
               // append the card to the projects div
               document.getElementById('projects').appendChild(projectCard);
           });
+
+    }
     })
     }
 

@@ -1,6 +1,11 @@
 
-<a href="/profile.php">back</a>
-<h3>Meine Projekte</h3>
+<a href="/profile.php">
+  <button class="brutal-btn">
+  Back
+  </button>
+</a>
+<h2>Meine Projekte</h2>
+<div class="projects">
 <?php
 $projects = $projects -> getUserProjects($auth -> getUserID());
 foreach ($projects as $project) {
@@ -8,3 +13,4 @@ foreach ($projects as $project) {
 }
 
 ?>
+</div>

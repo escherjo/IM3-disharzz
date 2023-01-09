@@ -31,6 +31,7 @@ if (isset($_POST['register'])) {
         } else {
             // If it isn't, register the user
             $auth->register($_POST['username'], $_POST['email'], $_POST['password']);
+            $_SESSION['success'] = 'Registration successful';
             // Redirect the user to the login page
             header('Location: /login.php');
             exit;

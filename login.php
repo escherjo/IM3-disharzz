@@ -18,9 +18,15 @@ if ($auth -> isLoggedIn()) {
       <main class="container">
         <div><?php echo $_SESSION['error']?></div>
         <form action="/auth/login.php" method="post">
+          <label for="username">Username</label>
+          <div class="input__container">
           <input type="text" name="username" placeholder="Username" required>
+          </div>
+          <label for="password">Password</label>
+          <div class="input__container">
           <input type="password" name="password" placeholder="Password" required>
-          <input type="submit" name="login" value="Login">
+          </div>
+          <button type="submit" name="login" class='brutal-btn'>Login</button>
         </form> 
       </main>
         <!-- Include Footer -->

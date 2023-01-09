@@ -7,7 +7,7 @@ $projects = new Projects();
 
 
 if (!$auth -> isLoggedIn()) {
-    header('Location: /');
+    header('Location: /login.php');
     exit();
 }
 //

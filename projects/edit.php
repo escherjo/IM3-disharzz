@@ -54,13 +54,19 @@ if (isset($_POST['submit'])) {
         <p>Test</p>
         <form action="" method="post">
           <label for="title">Title</label>
+          <div class="input__container">
           <input type="text" name="title" id="title" value="<?php echo $project['title'] ?>">
+          </div>
           <label for="description">Description</label>
+          <div class="textarea__container">
           <textarea name="description" id="description" cols="30" rows="10"><?php echo $project['description'] ?></textarea>
+          </div>
           <label for="tags">Tags</label>
+          <div class="input__container">
           <input type="text" name="tags" id="tags" value="<?php echo $project['tags'] ?>">
-          <input type="submit" name="submit" value="Update">
-        </form>
+          </div>
+          <Button type="submit" name="submit" class='brutal-btn'>Update</Button>
+        </Button>
       </main>
 
         <!-- Include Footer -->
