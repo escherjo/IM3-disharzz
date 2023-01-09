@@ -61,7 +61,8 @@ class Projects
             $stmt -> bindParam(':user_id', $userId);
             $stmt -> bindParam(':tags', $tags);
             $stmt -> execute();
-            return true;
+            $_SESSION['success'] = "Project created successfully";
+            header('Location: /profile.php');
         } catch (PDOException $e) {
             return $e -> getMessage();
         }
@@ -90,7 +91,8 @@ class Projects
           $stmt -> bindParam(':project_id', $project_id);
           $stmt -> bindParam(':tags', $tags);
           $stmt -> execute();
-         return true;
+          $_SESSION['success'] = "Project updated successfully";
+          header('Location: /projects/show.php?id=' . $project_id);
       } catch (PDOException $e) {
           return $e -> getMessage();
       }

@@ -38,9 +38,8 @@ if (!$project) {
 // if yes update project 
 // if no show form 
 if (isset($_POST['submit'])) {
-  if($projects->updateProject($_GET['id'], $_POST['title'], $_POST['description'], $_POST['tags'])) {
-    $_SESSION['success'] = 'Project updated successfully';
-    header('Location: /projects/show.php?id=' . $_GET['id']);
+  if(!$projects->updateProject($_GET['id'], $_POST['title'], $_POST['description'], $_POST['tags'])) {
+    $_SESSION['message'] = "Project updated failed";
   }
 }
 ?>

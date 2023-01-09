@@ -15,18 +15,8 @@ if (!$auth -> isLoggedIn()) {
 // if yes update project 
 // if no show form 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if (isset($_POST['update'])) {
-    if($projects->updateProject($_GET['id'], $_POST['title'], $_POST['description'], $_POST['tags'])) {
-      $_SESSION['success'] = 'Project updated successfully';
-      header('Location: /projects/show.php?id=' . $_GET['id']);
-      //header('Location: /projects.php');
-    }
-  }
-
   if(isset($_POST['createProject'])) {
-    if ($projects -> createProject($auth -> getUserID(), $_POST['title'], $_POST['description'], $_POST['tags'] )) {
-      header('Location: /profile.php');
-    } else {
+    if (!$projects -> createProject($auth -> getUserID(), $_POST['title'], $_POST['description'], $_POST['tags'] )) {
       $_SESSION['error'] = 'Project creation failed';
     }
   }

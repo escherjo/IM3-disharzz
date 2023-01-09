@@ -19,7 +19,6 @@ if (!$project) {
     header('Location: /projects.php');
     exit;
 }
-
 ?>
 <html>
     <?php include('../src/layout/head.php'); // File containing head code ?>
