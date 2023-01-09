@@ -6,12 +6,11 @@ $auth = new Auth();
 $projects = new Projects();
 ?>
 <html>
-    <head>
-        <title>Test</title>
-    </head>
+    <?php include('src/layout/head.php'); // File containing head code ?>
     <body>
         <!-- Include Header-->
         <?php include('src/layout/header.php'); // File containing header code?>
+      <main class="container">
         <h1>Test</h1>
         <p>Test</p>
 
@@ -24,6 +23,7 @@ $projects = new Projects();
         </div>
         <!-- Projects placeholder -->
         <div id='projects'></div>
+      </main>
 
         <!-- Include Footer -->
         <?php include('src/layout/footer.php'); // File containing footer code?>

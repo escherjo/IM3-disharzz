@@ -33,12 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <html>
-    <head>
-        <title>Test</title>
-    </head>
+   <?php include('src/layout/head.php'); // File containing head code ?>
     <body>
         <!-- Include Header-->
         <?php include('src/layout/header.php'); // File containing header code?>
+      <main class="container">
         <h1>Profile</h1>
         <?php
         switch ($_GET['page']) {
@@ -56,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 break;
         }
         ?>
+      </main>
         <!-- Include Footer -->
         <?php include('src/layout/footer.php'); // File containing footer code?>
     </body>

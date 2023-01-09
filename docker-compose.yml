@@ -1,7 +1,8 @@
 
 services:
   web:
-    image: webdevops/php-nginx:8.0-alpine 
+    #image: webdevops/php-nginx:8.2
+    image: formatdgmbh/webdevops-php-apache:8.0
     working_dir: /app
     ports:
       - 80:80

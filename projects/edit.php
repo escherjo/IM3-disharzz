@@ -46,12 +46,11 @@ if (isset($_POST['submit'])) {
 ?>
 
 <html>
-    <head>
-        <title>Test</title>
-    </head>
+    <?php include('../src/layout/head.php'); // File containing head code ?>
     <body>
         <!-- Include Header-->
         <?php include('../src/layout/header.php'); // File containing header code?>
+      <main class="container">
         <h1>Test</h1>
         <p>Test</p>
         <form action="" method="post">
@@ -63,6 +62,7 @@ if (isset($_POST['submit'])) {
           <input type="text" name="tags" id="tags" value="<?php echo $project['tags'] ?>">
           <input type="submit" name="submit" value="Update">
         </form>
+      </main>
 
         <!-- Include Footer -->
         <?php include('../src/layout/footer.php'); // File containing footer code?>
