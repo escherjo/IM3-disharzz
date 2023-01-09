@@ -20,7 +20,12 @@
   <div class="form-group">
     <label for="tags">Tags</label>
     <div class="input__container">
-    <input type="text" name="tags" id="tags" value="<?php echo $project['tags'] ?>">
+  <input type="text" name="tags" id="tags" value="
+    <?php 
+    if(isset($project['tags'])) {
+      echo $project['tags'];
+    } ?>
+">
     </div>
   </div>
   <button type="submit" name="createProject" class="brutal-btn">Projekt erstellen</button>

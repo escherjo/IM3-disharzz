@@ -41,7 +41,7 @@ $projects = new Projects();
     // to create the cards 
     // and display them on the page 
     async function getProjects() {
-        const response = await fetch('http://localhost/api/projects.php', {
+        const response = await fetch('/api/projects.php', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ $projects = new Projects();
     
     async function showTags() {
         // get all tags from api 
-        const response = await fetch('http://localhost/api/tags.php', {
+        const response = await fetch('/api/tags.php', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

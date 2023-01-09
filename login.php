@@ -2,8 +2,6 @@
 require_once 'class/auth.php';
 $auth = new Auth();
 
-echo $_SESSION['message'];
-
 if ($auth -> isLoggedIn()) {
     header('Location: /');
     exit();
@@ -16,7 +14,6 @@ if ($auth -> isLoggedIn()) {
         <?php include('src/layout/header.php'); // File containing header code?>
 
       <main class="container">
-        <div><?php echo $_SESSION['error']?></div>
         <form action="/auth/login.php" method="post">
           <label for="username">Username</label>
           <div class="input__container">

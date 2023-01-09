@@ -16,9 +16,6 @@ if ($auth -> isLoggedIn()) {
 
       <main class="container">
 
-        <div class="error">
-          <p><?php echo $error ?></p>
-        </div>
         <form action="/auth/register.php" method="post">
           <label for="username">Username</label>
 

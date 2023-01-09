@@ -53,7 +53,7 @@ class Projects
         return $project;
     }
 
-    public function createProject($userId, $title, $description, $tags):bool | string
+    public function createProject($userId, $title, $description, $tags)
     {
         try {
             $sql = "INSERT INTO " . $this -> db_table . " (user_id, title, description, tags ) VALUES (:user_id, :title, :description, :tags)";
@@ -70,7 +70,7 @@ class Projects
         }
     }
 
-    public function deleteProject($project_id) : bool | string
+    public function deleteProject($project_id)
     {
         try {
             $sql = "DELETE FROM " . $this -> db_table . " WHERE id = :project_id";
@@ -83,7 +83,7 @@ class Projects
         }
     }
 
-    public function updateProject($project_id, $title, $description, $tags): bool | string
+    public function updateProject($project_id, $title, $description, $tags)
     {
       try {
         $sql = "UPDATE " . $this -> db_table . " SET title = :title, description = :description, tags = :tags WHERE id = :project_id";

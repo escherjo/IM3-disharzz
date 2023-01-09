@@ -30,19 +30,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <main class="container">
         <h1>Profile</h1>
         <?php
-        switch ($_GET['page']) {
-            case 'createProject':
-                include('src/profile/createProject.php');
-                break;
-            case 'editProject':
-                include('src/profile/editProject.php');
-                break;
-            case 'showProjects':
-                include('src/profile/showProjects.php');
-                break;
-            default:
+        if(isset($_GET['page'])) {
+
+          switch ($_GET['page']) {
+              case 'createProject':
+                  include('src/profile/createProject.php');
+                  break;
+              case 'editProject':
+                  include('src/profile/editProject.php');
+                  break;
+              case 'showProjects':
+                  include('src/profile/showProjects.php');
+                  break;
+              default:
+                  include('src/profile/overview.php');
+                  break;
+          }
+        } else {
                 include('src/profile/overview.php');
-                break;
+
         }
         ?>
       </main>
