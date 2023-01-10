@@ -10,7 +10,7 @@ Ein Live Beispiel findest du [Hier](https://185457-1.web.fhgr.ch/)
 
 ## Konfiguration
 
-Kopiere die Datei ['db_empty.php'](./class/db_empty) im Verzeichnis ['class'](./class) zu db.php
+Kopiere die Datei ['db_empty.php'](./class/db_empty.php) im Verzeichnis ['class'](./class) zu db.php
 Hier werden die MySQL oder MariaDB Credentials angegeben. 
 ```javascript
     private $db_username = 'user'; // Benutzername
