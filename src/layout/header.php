@@ -8,6 +8,10 @@
       echo '<div class="header__message" id="message">' . $_SESSION['message'] . '</div>';
       unset($_SESSION['message']);
   }
+  if (isset($_SESSION['error'])) {
+      echo '<div class="header__message" id="message">' . $_SESSION['error'] . '</div>';
+      unset($_SESSION['error']);
+  }
   if (isset($_SESSION['success'])) {
       echo '<div class="header__success" id="success">' . $_SESSION['success'] . '</div>';
       unset($_SESSION['success']);
