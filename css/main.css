@@ -1,3 +1,5 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap');
 /* Basic Reset */
 html {
   box-sizing: border-box;
@@ -41,7 +43,7 @@ body {
   color: #222;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6   {
   font-family: 'Montserrat', sans-serif;
   color: #222;
 }
@@ -199,6 +201,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#5521b5",endCo
 }
 
 .project-card__header p {
+  font-family: 'Montserrat', sans-serif;
   font-size: clamp(1rem, -0.875rem + 8.333333vw, 2.25rem);
   padding: 0 0;
   margin: 0 0;
@@ -351,6 +354,7 @@ header .header__success {
 
 header .header__logo,
 footer .footer__logo {
+  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   letter-spacing: .1rem;
 }
@@ -452,6 +456,7 @@ header nav ul li {
 
 
 label {
+  font-family: 'Montserrat', sans-serif;
   display: block;
   font-size: 2.25rem;
   font-weight: 700;
@@ -484,6 +489,7 @@ label {
 
 input,
 textarea {
+  font-family: 'Open Sans', sans-serif;
   width: 100%;
   height: 100%;
   margin-bottom: 1rem;
