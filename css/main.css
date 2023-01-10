@@ -44,7 +44,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6   {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
   color: #222;
 }
 
@@ -201,7 +202,6 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#5521b5",endCo
 }
 
 .project-card__header p {
-  font-family: 'Montserrat', sans-serif;
   font-size: clamp(1rem, -0.875rem + 8.333333vw, 2.25rem);
   padding: 0 0;
   margin: 0 0;
@@ -354,7 +354,6 @@ header .header__success {
 
 header .header__logo,
 footer .footer__logo {
-  font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   letter-spacing: .1rem;
 }
@@ -456,7 +455,6 @@ header nav ul li {
 
 
 label {
-  font-family: 'Montserrat', sans-serif;
   display: block;
   font-size: 2.25rem;
   font-weight: 700;
